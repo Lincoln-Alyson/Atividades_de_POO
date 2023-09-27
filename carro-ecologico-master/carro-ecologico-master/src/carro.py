@@ -4,8 +4,8 @@ class Carro:
         self.quilometragem = 0
         self.combustivel = 0
         self.passageiros = 0
-        self.limite_passageiros = 2
-        self.limite_combustivel = 100
+
+
 
     def getPassageiros(self):
         return self.passageiros
@@ -17,14 +17,14 @@ class Carro:
         return self.quilometragem
 
     def embarcar(self):
-        if self.passageiros < self.limite_passageiros:
+        if self.passageiros < 2:
             self.passageiros += 1
             return True
         else:
             return False
 
     def desembarcar(self):
-        if self.passageiros > 0:
+        if 2 >= self.passageiros > 0:
             self.passageiros -= 1
             return True
         else:
@@ -32,23 +32,25 @@ class Carro:
 
 
     def dirigir(self, distancia):
-        if self.passageiros > 0 and self.combustivel > 0:
-            if self.combustivel >= distancia:
-                self.quilometragem += distancia
+        if self.passageiros != 0 and 100 > distancia > 0:
+            if distancia <= self.combustivel:
                 self.combustivel -= distancia
-                return f'Percorridos {distancia} km.'
-            else:
-                distancia_possivel = self.combustivel
-                self.quilometragem += distancia_possivel
-                self.combustivel -= distancia_possivel
-                return f'Percorridos {distancia_possivel} km. Combustível insuficiente para a viagem completa.'
+                self.quilometragem += distancia
+                return True
+        if distancia > 100:
+            diferenca = distancia - 100
+            self.combustivel = 0
+            self.quilometragem += distancia - diferenca
+            return False
         else:
             return False
 
     def abastecer(self, quantidade):
-        if quantidade > 0 and self.combustivel + quantidade <= self.limite_combustivel:
+        if 0 < quantidade <= 100:
             self.combustivel += quantidade
+        if quantidade > 100:
+            self.combustivel = 100
             return True
-        elif quantidade + self.combustivel > self.limite_combustivel:
+        else:
             return False
 

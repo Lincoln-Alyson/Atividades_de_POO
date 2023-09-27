@@ -1,4 +1,4 @@
-from carro import Carro
+from src.carro import Carro
 
 if __name__ == '__main__':
     #Criando um carro
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     quilometragemAntigo = carro.getQuilometragem()
     if carro.dirigir(70):
         distancia = carro.getQuilometragem() - quilometragemAntigo
-        print("O combustivel acabou ao percorrer " + str(distancia) + " kms")
+        print("O combustivel acabou ao percorrer " + distancia + " kms")
 
     print(carro.__dict__)
 
