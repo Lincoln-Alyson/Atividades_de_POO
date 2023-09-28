@@ -69,7 +69,7 @@ class Cofre:
 
     def quebrar(self):
         if not self.quebrou:
-            print('Seu cofrinho está quebrado!')
+            print('Seu cofre quebrou!')
             self.quebrou = True
             return True
         else:
