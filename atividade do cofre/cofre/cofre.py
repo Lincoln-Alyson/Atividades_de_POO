@@ -15,12 +15,12 @@ class Cofre:
         return self.volume
 
     def getVolumeMaximo(self):
-        return self.VolumeMaximo
+        return self.volumeMaximo
 
     def getVolumeRestante(self):
         return self.volume_restante
 
-    def add(self, item: Item):
+    def additem(self, item: Item):
         if self.volume == self.volumeMaximo:
             return False
         if self.quebrou == False:
@@ -34,7 +34,7 @@ class Cofre:
                 return True
         else:
             return False
-    def add(self, moeda: Moeda):
+    def addmoeda(self, moeda: Moeda):
         self.moeda = moeda
         if self.volume == self.volumeMaximo:
             return False
