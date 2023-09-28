@@ -21,19 +21,57 @@ class Cofre:
         return self.VolumeRestante
 
     def add(self, item: Item):
-        return False
+        if self.volume == self.volumemaximo or self.quebrou:
+            return False
+        if self.volume <= self.VolumeRestante and item.volume <= self.volumemaximo:
+            self.volume += item.volume
+            if self.itens_do_cofre:
+                self.itens_do_cofre += f", {item.descricao}"
+            else:
+                self.itens_do_cofre += item.descricao
+                self.volumeRestante = self.volumemaximo - self.volume
+                return True
+        else:
+            return False
 
     def add(self, moeda: Moeda):
-        return False
+        self.moeda = moeda
+        if self.volume == self.volumemaximo:
+            return False
+        if not self.quebrou:
+            if 0 < moeda.value[1] <= self.volumeRestante:
+                self.volume += moeda.value[1]
+                self.soma_de_moedas += moeda.value[0]
+                self.volumeRestante = self.volumemaximo - self.volume
+                return True
+        else:
+            return False
 
     def obterItens(self):
-        return "vazio"
+        if self.quebrou:
+            if self.itens_do_cofre:
+                return self.itens_do_cofre
+            else:
+                return 'vazio'
+        else:
+            return None
 
     def obterMoedas(self):
-        return -1
+        if self.quebrou == True:
+            return self.soma_de_moedas
+        else:
+            return -1
+
 
     def taInteiro(self):
-        return False
+        if self.quebrou == False:
+            return True
 
     def quebrar(self):
-        return False
+        if not self.quebrou:
+            print('Seu cofrinho está quebrado!')
+            self.quebrou = True
+            return True
+        else:
+            print('O cofrinho já está quebrado!')
+            return False
