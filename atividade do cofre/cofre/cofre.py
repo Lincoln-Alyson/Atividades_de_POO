@@ -5,8 +5,8 @@ class Cofre:
 
     def __init__(self, volumeMaximo: int):
         self.volume = 0
-        self.volumemaximo = volumeMaximo
-        self.VolumeRestante = self.volumemaximo - self.volume
+        self.volumeMaximo = volumeMaximo
+        self.volume_restante = self.volumeMaximo - self.volume
         self.itens_do_cofre = ''
         self.soma_de_moedas = 0
         self.quebrou = False
@@ -15,34 +15,34 @@ class Cofre:
         return self.volume
 
     def getVolumeMaximo(self):
-        return self.volumemaximo
+        return self.VolumeMaximo
 
     def getVolumeRestante(self):
-        return self.VolumeRestante
+        return self.volume_restante
 
     def add(self, item: Item):
-        if self.volume == self.volumemaximo or self.quebrou:
+        if self.volume == self.volumeMaximo:
             return False
-        if self.volume <= self.VolumeRestante and item.volume <= self.volumemaximo:
-            self.volume += item.volume
-            if self.itens_do_cofre:
-                self.itens_do_cofre += f", {item.descricao}"
-            else:
-                self.itens_do_cofre += item.descricao
-                self.VolumeRestante = self.volumemaximo - self.volume
+        if self.quebrou == False:
+            if item.volume <= self.volume_restante and item.volume <= self.volumeMaximo:
+                self.volume += item.volume
+                if self.itens_do_cofre:
+                    self.itens_do_cofre += f", {item.descricao}"
+                else:
+                    self.itens_do_cofre += item.descricao
+                self.volume_restante = self.volumeMaximo - self.volume
                 return True
         else:
             return False
-
     def add(self, moeda: Moeda):
         self.moeda = moeda
-        if self.volume == self.volumemaximo:
+        if self.volume == self.volumeMaximo:
             return False
-        if not self.quebrou:
-            if 0 < moeda.value[1] <= self.VolumeRestante:
+        if self.quebrou == False:
+            if 0 < moeda.value[1] <= self.volume_restante:
                 self.volume += moeda.value[1]
                 self.soma_de_moedas += moeda.value[0]
-                self.VolumeRestante = self.volumemaximo - self.volume
+                self.volume_restante = self.volumeMaximo - self.volume
                 return True
         else:
             return False

@@ -1,9 +1,9 @@
 import unittest
 from enum import Enum
 
-from cofre import Cofre
-from item import Item
-from moeda import Moeda
+from cofre.cofre import Cofre
+from cofre.item import Item
+from cofre.moeda import Moeda
 
 
 class TestCofre(unittest.TestCase):
